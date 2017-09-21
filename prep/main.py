@@ -1,25 +1,24 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
-import const
-
+from const   import *
+from clean   import clean
 from owakati import owakati
 from docs    import docs
-from extract import extract
 
-# Extract "Background of the invention" from "Description
-extract(
-    const.PATH_INPUT,
-    const.PATH_OUTPUT_IM1
+# Clean contents of files in the specified directory
+clean(
+    PATH_INPUT,
+    PATH_OUTPUT_IM1
     )
 
-" Split contents of "Background of the invention"
+# Split contents of "Background of the invention"
 owakati(
-    const.PATH_OUTPUT_IM1,
-    const.PATH_OUTPUT_IM2
+    PATH_OUTPUT_IM1,
+    PATH_OUTPUT_IM2
     )
 
 # Make "Labeled sentence"
 docs(
-    const.PATH_OUTPUT_IM2,
-    const.PATH_OUTPUT
+    PATH_OUTPUT_IM2,
+    PATH_OUTPUT
     )

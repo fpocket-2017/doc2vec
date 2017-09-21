@@ -1,16 +1,16 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
 import codecs
 import os
 import re
 import pickle
 
-from gensim.models.doc2vec import LabeledSentence
-
 def docs(
     path_input,
     path_output
-    )
+    ):
+
+    from gensim.models.doc2vec import LabeledSentence
     
     # Make a list of files in the specified directory
     flist = os.listdir(path_input)
@@ -19,10 +19,11 @@ def docs(
     docs = [] 
 
     # Loop in flist
+    total_count = len(flist)
     for idx, file in enumerate(flist):
-        print('{}: {}'.format(idx, file))
+        print('Docs {0}/{1}: {2}'.format(idx + 1, total_count, file))
     
-        with codecs.open('{}/{}'.format(path_input, file), 'r', 'utf-8') as fp
+        with codecs.open('{}/{}'.format(path_input, file), 'r', 'utf-8') as fp:
 
             # Split documents into words
             words = re.split(u' ', fp.read())

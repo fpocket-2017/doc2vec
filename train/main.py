@@ -1,43 +1,39 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
 import codecs
 import pickle
 
+from const  import *
 from gensim import models
-
-PATH_INPUT  = u'data/input'
-PATH_OUTPUT = u'data/output'
 
 EPOCHS = 20
 
-with codecs.open('{}/{}'.format(PATH_INPUT, u'docs.bin'), 'rb') as fp_in:
-     docs = pickle.load(fp_in)
+# Load docs file
+print('Loading docs file...')
+with codecs.open('{}/{}'.format(PATH_INPUT, u'docs.bin'), 'rb') as fp:
+     docs = pickle.load(fp)
 
 # Make a model
-print('Making model...')
+print('Making a model...')
 model = models.Doc2Vec(
-            docs,
-            dm        = 0,
-            size      = 617,
-            window    = 15,
-            alpha     = .025,
-            min_alpha = .025,
+            size      = 10,
+            alpha     = 0.0015,
+            sample    = 1e-5,
             min_count = 1,
-            sample    = 1e-6
         )
 
-# Train the model
-for epoch in range(EPOCHS):
-    print('Epoch: {}'.format(epoch + 1))
-    
-    model.train(
-        docs,
-        total_examples = 617,
-        epochs = EPOCHS
+# Train a model
+print('Training the model...')
+model.build_vocab(docs)
+
+print('corpus_count: {0}'.format(model.corpus_count))
+print('epochs      : {0}'.format(model.iter))
+model.train(
+    docs,
+    total_examples = model.corpus_count,
+    epochs         = 200
     )
-    
-    model.alpha -= (0.025 - 0.0001) / 19
-    model.min_alpha = model.alpha
 
 # Save the model
-model.save('{}/{}'.format(PATH_OUTPUT, 'doc2vec.model'))
+print('Saving the model...')
+model.save('{}/{}'.format(PATH_OUTPUT, 'model.bin'))
