@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
 
-PATH_INPUT      = u'data/input'
-PATH_OUTPUT     = u'data/output'
+PATH_INPUT      = 'data/input'
+PATH_INPUT_DOCS = 'data/docs'
+
+PATH_OUTPUT      = 'data/output'
