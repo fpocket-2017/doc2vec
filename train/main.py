@@ -27,7 +27,7 @@ model.build_vocab(docs)
 model.train(
     docs,
     total_examples = model.corpus_count,
-    epochs         = 50
+    epochs         = 100
     )
 
 # Save the model
