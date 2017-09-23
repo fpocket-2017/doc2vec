@@ -6,8 +6,8 @@ import pickle
 from const  import *
 from gensim import models
 
-# Load docs file
-print('Loading docs file...')
+# Load a docs file
+print('Loading a docs file...')
 with codecs.open('{}/{}'.format(PATH_INPUT, u'docs.bin'), 'rb') as fp:
      docs = pickle.load(fp)
 
@@ -20,7 +20,7 @@ model = models.Doc2Vec(
             min_count = 1,
         )
 
-# Train a model
+# Train the model
 print('Training the model...')
 model.build_vocab(docs)
 
